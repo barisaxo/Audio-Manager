@@ -88,19 +88,19 @@ public class LocalSFXAudioSource : MonoBehaviour
     //    Debug.Log(localSFX.time);
     //}
 
-    public void FadeOutLocalSFX(float fade)
+    public void FadeOutLocalSFX(float fadeRate, float fadeDuration)
     {//do not use fadeout while loop == true;
         FindLocalSFXClipLength();
-        StartCoroutine(FadingLocalSFXOut(fade));
+        StartCoroutine(FadingLocalSFXOut(fadeRate, fadeDuration));
     }
 
-    IEnumerator FadingLocalSFXOut(float fade)
+    IEnumerator FadingLocalSFXOut(float fadeRate, float fadeDuration)
     {
         while (localSFX.time < localSFXClipLength)
         {
-            if (localSFX.time >= localSFXClipLength - 1.5f)
+            if (localSFX.time >= localSFXClipLength - fadeDuration)
             {
-                localSFX.volume -= localSFX.volume * Time.deltaTime * fade;
+                localSFX.volume -= localSFX.volume * Time.deltaTime * fadeRate;
             }
             yield return new WaitForEndOfFrame();
         }
@@ -108,17 +108,17 @@ public class LocalSFXAudioSource : MonoBehaviour
         yield return null;
     }
 
-    public void FadeInLocalSFX(float fade)
+    public void FadeInLocalSFX(float fadeRate)
     {
         localSFX.volume = .0f;
-        StartCoroutine(FadingLocalSFXIn(fade));
+        StartCoroutine(FadingLocalSFXIn(fadeRate));
     }
 
-    IEnumerator FadingLocalSFXIn(float fade)
+    IEnumerator FadingLocalSFXIn(float fadeRate)
     {
         while (localSFX.volume < volume)
         {
-            localSFX.volume += Time.deltaTime * fade;
+            localSFX.volume += Time.deltaTime * fadeRate;
             yield return new WaitForEndOfFrame();
         }
         localSFX.volume = volume;

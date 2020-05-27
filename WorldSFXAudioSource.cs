@@ -94,19 +94,19 @@ public class WorldSFXAudioSource : MonoBehaviour
     //    Debug.Log(worldSFX.time);
     //}
 
-    public void FadeOutWorldSFX(float fade)
+    public void FadeOutWorldSFX(float fadeRate, float fadeDuration)
     {//do not use fadeout while loop == true;
         FindWorldSFXClipLength();
-        StartCoroutine(FadingWorldSFXOut(fade));
+        StartCoroutine(FadingWorldSFXOut(fadeRate, fadeDuration));
     }
 
-    IEnumerator FadingWorldSFXOut(float fade)
+    IEnumerator FadingWorldSFXOut(float fadeRate, float fadeDuration)
     {
         while (worldSFX.time < worldSFXClipLength)
         {
-            if (worldSFX.time >= worldSFXClipLength - 1.5f)
+            if (worldSFX.time >= worldSFXClipLength - fadeDuration)
             {
-                worldSFX.volume -= worldSFX.volume * Time.deltaTime * fade;
+                worldSFX.volume -= worldSFX.volume * Time.deltaTime * fadeRate;
             }
             yield return new WaitForEndOfFrame();
         }
@@ -114,17 +114,17 @@ public class WorldSFXAudioSource : MonoBehaviour
         yield return null;
     }
 
-    public void FadeInWorldSFX(float fade)
+    public void FadeInWorldSFX(float fadeRate)
     {
         worldSFX.volume = .0f;
-        StartCoroutine(FadingWorldSFXIn(fade));
+        StartCoroutine(FadingWorldSFXIn(fadeRate));
     }
 
-    IEnumerator FadingWorldSFXIn(float fade)
+    IEnumerator FadingWorldSFXIn(float fadeRate)
     {
         while (worldSFX.volume < volume)
         {
-            worldSFX.volume += Time.deltaTime * fade;
+            worldSFX.volume += Time.deltaTime * fadeRate;
             yield return new WaitForEndOfFrame();
         }
         worldSFX.volume = volume;
