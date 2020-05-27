@@ -84,19 +84,19 @@ public class AmbienceAudioSource : MonoBehaviour
         yield return null;
     }
 
-    public void FadeOutAmbience(float fade)
+    public void FadeOutAmbience(float fadeRate, float fadeDuration)
     {//do not use with looped ambience clips
         FindAmbienceClipLength();
-        StartCoroutine(FadingAmbienceOut(fade));
+        StartCoroutine(FadingAmbienceOut(fadeRate, fadeDuration));
     }
 
-    IEnumerator FadingAmbienceOut(float fade)
+    IEnumerator FadingAmbienceOut(float fadeRate, float fadeDuration)
     {
         while (ambience.time < ambienceClipLength)
         {
-            if (ambience.time >= ambienceClipLength - 1.5f)
+            if (ambience.time >= ambienceClipLength - fadeDuration)
             {
-                ambience.volume -= ambience.volume * Time.deltaTime * fade;
+                ambience.volume -= ambience.volume * Time.deltaTime * fadeRate;
             }
             yield return new WaitForEndOfFrame();
         }
@@ -104,17 +104,17 @@ public class AmbienceAudioSource : MonoBehaviour
         yield return null;
     }
 
-    public void FadeInAmbience(float fade)
+    public void FadeInAmbience(float fadeRate, float fadeDuration)
     {
         ambience.volume = .0f;
-        StartCoroutine(FadingAmbienceIn(fade));
+        StartCoroutine(FadingAmbienceIn(fadeRate, fadeDuration));
     }
 
-    IEnumerator FadingAmbienceIn(float fade)
+    IEnumerator FadingAmbienceIn(float fadeRate)
     {
         while (ambience.volume < volume)
         {
-            ambience.volume += Time.deltaTime * fade;
+            ambience.volume += Time.deltaTime * fadeRate;
             yield return new WaitForEndOfFrame();
         }
         ambience.volume = volume;

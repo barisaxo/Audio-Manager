@@ -119,17 +119,17 @@ public class MusicAudioSource : MonoBehaviour
         yield return null;
     }
 
-    public void FadeInMusic(float fade)
+    public void FadeInMusic(float fadeRate)
     {
         music.volume = .0f;
-        StartCoroutine(FadingMusicIn(fade));
+        StartCoroutine(FadingMusicIn(fadeRate));
     }
 
-    IEnumerator FadingMusicIn(float fade)
+    IEnumerator FadingMusicIn(float fadeRate)
     {
         while (music.volume < volume)
         {
-            music.volume += Time.deltaTime * fade;
+            music.volume += Time.deltaTime * fadeRate;
             yield return new WaitForEndOfFrame();
         }
         music.volume = volume;
