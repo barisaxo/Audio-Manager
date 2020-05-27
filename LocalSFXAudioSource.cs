@@ -61,7 +61,7 @@ public class LocalSFXAudioSource : MonoBehaviour
         timePosition = localSFX.time;
     }
 
-    public void PlayAmbienceFromUntilTime(float fromSeconds, float untilSeconds)
+    public void PlayLocalSFXFromUntilTime(float fromSeconds, float untilSeconds)
     {
         localSFX.time = fromSeconds;
         localSFX.Play();

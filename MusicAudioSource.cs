@@ -19,16 +19,6 @@ public class MusicAudioSource : MonoBehaviour
         music.volume = volume;
         musicClip = audioManager.audioAssetSub.musicClip;
         music.loop = true;
-
-        TestMusic();
-    }
-
-    void TestMusic()
-    {
-
-        LoadMusicClip(0);
-        PlayMusicFromTime(25f);
-        FadeOutMusic(.5f, 3f);
     }
 
     public void LoadMusicClip(int index)
@@ -72,7 +62,7 @@ public class MusicAudioSource : MonoBehaviour
         timePosition = music.time;
     }
 
-    public void PlayAmbienceFromUntilTime(float fromSeconds, float untilSeconds)
+    public void PlayMusicFromUntilTime(float fromSeconds, float untilSeconds)
     {
         music.time = fromSeconds;
         music.Play();

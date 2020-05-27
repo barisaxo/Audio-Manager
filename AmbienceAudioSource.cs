@@ -104,10 +104,10 @@ public class AmbienceAudioSource : MonoBehaviour
         yield return null;
     }
 
-    public void FadeInAmbience(float fadeRate, float fadeDuration)
+    public void FadeInAmbience(float fadeRate)
     {
         ambience.volume = .0f;
-        StartCoroutine(FadingAmbienceIn(fadeRate, fadeDuration));
+        StartCoroutine(FadingAmbienceIn(fadeRate));
     }
 
     IEnumerator FadingAmbienceIn(float fadeRate)
